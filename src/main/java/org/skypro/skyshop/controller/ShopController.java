@@ -30,12 +30,13 @@ public class ShopController {
 
     @GetMapping("/products")
     public Collection<Product> getAllProducts() {
-        return storageService.getAllProducts;
+        return storageService.getAllProducts();
     }
 
     @GetMapping("/articles")
     public Collection<Article> getAllArticles() {
-        return  storageService.getAllArticles;
+
+        return  storageService.getAllArticles();
     }
 
     @GetMapping("/search")

@@ -12,45 +12,15 @@ import java.util.*;
 @Service
 public class StorageService {
 
-    private final Map<UUID, Product> products;
-    private final Map<UUID, Article> articles;
-    public Collection<Product> getAllProducts;
-    public Collection<Article> getAllArticles;
-    private final Map<UUID, Product> availableProducts;
-    private final Map<UUID, Article> availableArticles;
+    private final Map<UUID, Product> availableProducts = new HashMap<>();
+    private final Map<UUID, Article> availableArticles = new HashMap<>();
 
-    public StorageService () {
-        availableProducts = new HashMap<>();
-        availableArticles = new HashMap<>();
-        this.products = new HashMap<>();
-        this.articles = new HashMap<>();
-        initializeTestData();
+    public StorageService() {
         initializeData();
-        
-    }
-
-    private void initializeTestData() {
-
-        Product p1 = new SimpleProduct(UUID.randomUUID(), "Спиннинг рыболовный", 10000);
-        Product p2 = new DiscountedProduct(UUID.randomUUID(), "Фонарь", 600, 10);
-        Product p3 = new SimpleProduct(UUID.randomUUID(), "Лодка", 50000);
-
-        products.put(p1.getId(), p1);
-        products.put(p2.getId(), p2);
-        products.put(p3.getId(), p3);
-
-
-        Article a1 = new Article(UUID.randomUUID(), "Новая статья о технологиях", new String[]{"tech", "gadgets"});
-        Article a2 = new Article(UUID.randomUUID(), "Как выбрать смартфон", new String[]{"guide", "mobile"});
-        Article a3 = new Article(UUID.randomUUID(), "Будущее ноутбуков", new String[]{"laptop", "future"});
-
-        articles.put(a1.getId(), a1);
-        articles.put(a2.getId(), a2);
-        articles.put(a3.getId(), a3);
     }
 
     private void initializeData() {
-
+        // Тестовые продукты
         Product p1 = new SimpleProduct(UUID.randomUUID(), "Спиннинг рыболовный", 10000);
         Product p2 = new DiscountedProduct(UUID.randomUUID(), "Фонарь", 600, 10);
         Product p3 = new SimpleProduct(UUID.randomUUID(), "Лодка", 50000);
@@ -59,7 +29,7 @@ public class StorageService {
         availableProducts.put(p2.getId(), p2);
         availableProducts.put(p3.getId(), p3);
 
-
+        // Тестовые статьи
         Article a1 = new Article(UUID.randomUUID(), "Новая статья о технологиях", new String[]{"tech", "gadgets"});
         Article a2 = new Article(UUID.randomUUID(), "Как выбрать смартфон", new String[]{"guide", "mobile"});
         Article a3 = new Article(UUID.randomUUID(), "Будущее ноутбуков", new String[]{"laptop", "future"});
@@ -78,7 +48,7 @@ public class StorageService {
     }
 
     public Collection<Searchable> getAllSearchables() {
-        Collection<Searchable> all = new java.util.ArrayList<>();
+        Collection<Searchable> all = new ArrayList<>();
         all.addAll(availableProducts.values());
         all.addAll(availableArticles.values());
         return all;
@@ -87,5 +57,4 @@ public class StorageService {
     public Optional<Product> getProductById(UUID id) {
         return Optional.ofNullable(availableProducts.get(id));
     }
-
 }
