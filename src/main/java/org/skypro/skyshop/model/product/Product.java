@@ -12,7 +12,7 @@ public abstract class Product implements Searchable {
     private final int basePrice;
 
     public Product(UUID id, String name, int basePrice) {
-        if (name == null || name.trim().isEmpty()) {
+        if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Имя продукта не может быть пустым.");
         }
         this.name = name;

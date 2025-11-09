@@ -26,10 +26,7 @@ public class BasketService {
 
     //ДОБАВИТЬ
     public void addProductToBasket(UUID id) {
-        Optional<Product> productOptional = storageService.getProductById(id);
-        if (productOptional.isEmpty()) {
-            throw new NoSuchProductException("Товар с id " + id + " не найден");
-        }
+        storageService.getProductById(id).orElseThrow( ()-> new NoSuchProductException("Товар с id " + id + " не найден") );
         productBasket.addProduct(id);
     }
 

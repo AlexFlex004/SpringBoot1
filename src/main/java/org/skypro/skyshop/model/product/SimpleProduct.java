@@ -7,9 +7,7 @@ public class SimpleProduct extends Product {
 
     public SimpleProduct(UUID id, String name, int price) {
         super(id, name, price);
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Имя продукта не может быть пустым.");
-        }
+
         if (price <= 0) {
             throw new IllegalArgumentException("Цена продукта должна быть больше 0.");
         }

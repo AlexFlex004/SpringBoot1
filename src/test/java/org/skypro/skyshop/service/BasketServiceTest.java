@@ -3,6 +3,7 @@ package org.skypro.skyshop.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.skypro.skyshop.exception.NoSuchProductException;
 import org.skypro.skyshop.model.basket.ProductBasket;
 import org.skypro.skyshop.model.basket.UserBasket;
 import org.skypro.skyshop.model.product.Product;
@@ -34,8 +35,8 @@ class BasketServiceTest {
     void testAddProductThrowsExceptionWhenProductNotFound() {
         UUID id = UUID.randomUUID();
         when(storageService.getProductById(id)).thenReturn(Optional.empty());
+        assertThrows(NoSuchProductException.class, () -> basketService.addProductToBasket(id));
 
-        assertThrows(IllegalArgumentException.class, () -> basketService.addProductToBasket(id));
         verify(productBasket, never()).addProduct(any());
     }
 
